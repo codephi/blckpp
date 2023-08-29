@@ -37,7 +37,18 @@ To use Blckpp, run the following command:
 
 ## Uninstall
 
-Execute `./uninstall.sh`
+## CURL
+
+```
+curl -sSL https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | bash
+```
+
+## WGET
+
+```
+wget -qO- https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | bash
+```
+
 
 ## License
 
