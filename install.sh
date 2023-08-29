@@ -35,3 +35,6 @@ sudo systemctl enable $service_name
 
 # Iniciar o serviço
 sudo systemctl start $service_name
+
+# CP to /usr/bin
+sudo cp $app_path /usr/bin/blckpp

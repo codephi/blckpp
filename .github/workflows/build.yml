@@ -1,0 +1,40 @@
+name: Release Workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions: write-all
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build Rust application
+        run: cargo build --release
+
+      - name: Move bin
+        run: mkdir bin && mv target/release/blckpp bin/blckpp
+    
+      - name: Create Release
+        uses: cogup/actions/lib-release@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          force-add: bin
