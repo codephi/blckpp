@@ -35,6 +35,10 @@ To use Blckpp, run the following command:
 - Set the sleep time to 5 seconds: `blckpp -s 5`
 - Disable Blckpp: `blckpp -a false`
 
+## Uninstall
+
+Execute `./uninstall.sh`
+
 ## License
 
 Blckpp is released under the MIT License. See [LICENSE](LICENSE) for details.
