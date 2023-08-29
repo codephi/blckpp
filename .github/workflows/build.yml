@@ -32,9 +32,17 @@ jobs:
 
       - name: Move bin
         run: mkdir bin && mv target/release/blckpp bin/blckpp
+
+      - name: get version
+        id: get_version
+        run: echo ::set-output name=version::$(cat Cargo.toml | grep version | head -n 1 | cut -d '"' -f 2)
+
+      - name: Replace <VERSION> on install.sh
+        run: sed -i "s/<VERSION>/${{ steps.get_version.outputs.version }}/g" install.sh
     
       - name: Create Release
         uses: cogup/actions/lib-release@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           force-add: bin
+          version: ${{ steps.get_version.outputs.version }}
