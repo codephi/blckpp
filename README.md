@@ -35,7 +35,7 @@ To use Blckpp, run the following command:
 - Set the sleep time to 5 seconds: `blckpp -s 5`
 - Disable Blckpp: `blckpp -a false`
 
-## Uninstall
+# Uninstall
 
 ## CURL
 
@@ -48,7 +48,8 @@ curl -sSL https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | b
 ```
 wget -qO- https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | bash
 ```
-
+# Settings
+Run `blckpp --settings` for update and view current settings, example: `blckpp --settings --sleep 500`
 
 ## License
 

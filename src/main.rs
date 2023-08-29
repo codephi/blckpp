@@ -199,6 +199,7 @@ fn main() {
     let default_settings = load_and_update_config(&args);
 
     if args.settings {
+        println!("{:#?}", default_settings);
         return;
     } else if i_selt_in_exeution() {
         println!("blckpp is already running");
