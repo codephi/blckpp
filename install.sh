@@ -33,6 +33,9 @@ app_path="$extracted_path/bin/blckpp"
 # Service name
 service_name="blckpp"
 
+# Copy to /usr/bin
+sudo cp $app_path /usr/bin/blckpp
+
 # Content of the service file
 service_content="[Unit]
 Description=BLCKPP
@@ -40,7 +43,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=$app_path
+ExecStart=/usr/bin/blckpp
 Restart=always
 
 [Install]
@@ -68,9 +71,6 @@ sudo systemctl enable $service_name
 
 # Start the service
 sudo systemctl start $service_name
-
-# Copy to /usr/bin
-sudo cp $app_path /usr/bin/blckpp
 
 rm -rf blckpp.zip $extract_dir
 
