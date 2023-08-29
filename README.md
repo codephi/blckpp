@@ -3,7 +3,6 @@
 Blckpp is an open-source application that prevents the opening of processes in Linux. With Blckpp, you can block specific processes from running on your system. For example, you can block Chrome from opening by running `blckpp -b chrome`. This way, every time Chrome is opened, Blckpp will close it.
 
 [![Latest Release](https://img.shields.io/github/v/release/codephi/blckpp.svg)](https://github.com/codephi/blckpp/releases/latest)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/codephi/blckpp/build?label=Actions%20Status)
 
 
 # Install
