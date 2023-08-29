@@ -6,11 +6,11 @@ Blckpp is an open-source application that prevents the opening of processes in L
 
 
 # Install
-## CURL
+### curl
 ```
 curl -sSL https://raw.githubusercontent.com/codephi/blckpp/main/install.sh | bash
 ```
-## WGET
+### wget
 ```
 wget -qO- https://raw.githubusercontent.com/codephi/blckpp/main/install.sh | bash
 ```
@@ -37,13 +37,13 @@ To use Blckpp, run the following command:
 
 # Uninstall
 
-## CURL
+### curl
 
 ```
 curl -sSL https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | bash
 ```
 
-## WGET
+### wget
 
 ```
 wget -qO- https://raw.githubusercontent.com/codephi/blckpp/main/uninstall.sh | bash

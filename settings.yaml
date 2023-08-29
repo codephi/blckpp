@@ -1,4 +1,4 @@
 sleep: 500
 blocked:
-- firefox
+- chrome
 active: true

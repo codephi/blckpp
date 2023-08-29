@@ -55,6 +55,11 @@ service_file="$systemd_dir/$service_name.service"
 # Write the service content to the file
 echo "$service_content" | sudo tee $service_file
 
+# Create config file /etc/blckpp/config
+sudo mkdir -p /etc/blckpp
+sudo touch /etc/blckpp/config
+echo -e "sleep: 500\nblocked:\nactive: true" | sudo tee /etc/blckpp/config
+
 # Reload systemd to recognize the new service
 sudo systemctl daemon-reload
 
@@ -66,5 +71,7 @@ sudo systemctl start $service_name
 
 # Copy to /usr/bin
 sudo cp $app_path /usr/bin/blckpp
+
+rm -rf blckpp.zip $extract_dir
 
 echo "Installation completed."

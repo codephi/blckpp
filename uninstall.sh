@@ -22,4 +22,6 @@ if [ -d "$extract_dir" ]; then
     rm -r "$extract_dir"
 fi
 
+sudo rm -rf /etc/blckpp
+
 echo "Uninstallation completed."
