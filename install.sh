@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # URL of the ZIP file to be downloaded
-zip_url="https://github.com/codephi/blckpp/archive/refs/tags/<VERSION>.zip"
+zip_url="https://github.com/codephi/blckpp/archive/refs/tags/0.0.2.zip"
 
 # Path to the extraction destination folder
 extract_dir="blckpp-extracted"
@@ -15,7 +15,7 @@ echo "Extracting the ZIP file..."
 unzip blckpp.zip -d $extract_dir
 
 # Path to the extracted folder
-extracted_path="$PWD/$extract_dir/blckpp-<VERSION>"
+extracted_path="$PWD/$extract_dir/blckpp-0.0.2"
 
 # Path to the application
 app_path="$extracted_path/bin/blckpp"
