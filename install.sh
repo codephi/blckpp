@@ -1,7 +1,17 @@
 #!/bin/bash
 
+# GitHub repository information
+user="codephi"
+repo="blckpp"
+
+# Fetch the latest release information using GitHub API
+release_info=$(curl -s "https://api.github.com/repos/codephi/blckpp/releases/latest")
+
+# Extract the latest version tag
+version=$(echo "$release_info" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+
 # URL of the ZIP file to be downloaded
-zip_url="https://github.com/codephi/blckpp/archive/refs/tags/<VERSION>.zip"
+zip_url="https://github.com/$user/$repo/archive/refs/tags/$version.zip"
 
 # Path to the extraction destination folder
 extract_dir="blckpp-extracted"
@@ -15,7 +25,7 @@ echo "Extracting the ZIP file..."
 unzip blckpp.zip -d $extract_dir
 
 # Path to the extracted folder
-extracted_path="$PWD/$extract_dir/blckpp-<VERSION>"
+extracted_path="$PWD/$extract_dir/$repo-$version"
 
 # Path to the application
 app_path="$extracted_path/bin/blckpp"
