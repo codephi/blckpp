@@ -172,7 +172,7 @@ fn load_and_update_config(args: &Args) -> Settings {
 
     merge_config(&mut settings, &args);
 
-    save_yaml_config(path::Path::new("settings.yaml"), &settings)
+    save_yaml_config(path::Path::new("/etc/blckpp/config"), &settings)
         .unwrap_or_else(|e| panic!("Failed to save config: {}", e));
 
     settings
