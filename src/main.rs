@@ -7,8 +7,8 @@ use std::path;
 
 #[derive(Debug)]
 struct Process {
-    pid: i32,
-    comm: String,
+    pub pid: i32,
+    pub comm: String,
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone)]
@@ -29,6 +29,9 @@ struct Args {
 
     #[clap(short, long)]
     active: Option<bool>,
+
+    #[clap(long)]
+    settings: bool,
 }
 
 fn list_processes() -> Vec<Process> {
@@ -87,11 +90,15 @@ fn save_yaml_config(
 }
 
 fn merge_config(settings: &mut Settings, new_settings: &Args) {
+    let mut update = false;
+
     if new_settings.sleep.is_some() {
+        update = true;
         settings.sleep = new_settings.sleep.unwrap();
     }
 
     if new_settings.blocked.is_some() {
+        update = true;
         settings.blocked = new_settings
             .blocked
             .clone()
@@ -102,7 +109,12 @@ fn merge_config(settings: &mut Settings, new_settings: &Args) {
     }
 
     if new_settings.active.is_some() {
+        update = true;
         settings.active = new_settings.active.clone().unwrap();
+    }
+
+    if update {
+        println!("Settings updated");
     }
 }
 
@@ -110,7 +122,7 @@ fn listen_process(default_settings: Settings) {
     let mut default_active: bool = default_settings.active;
 
     println!("Listening for processes...");
-    
+
     loop {
         let settings = match load_file_config() {
             Ok(settings) => settings,
@@ -146,15 +158,14 @@ fn listen_process(default_settings: Settings) {
 }
 
 fn load_file_config() -> Result<Settings, Box<dyn std::error::Error>> {
-    match import_yaml_config(path::Path::new("settings.yaml")) {
+    match import_yaml_config(path::Path::new("/etc/blckpp/config")) {
         Ok(settings) => Ok(settings),
         Err(err) => Err(err),
     }
 }
 
-fn load_and_update_config() -> Settings {
-    let args = Args::parse();
-    let mut settings = match load_file_config() {
+fn load_and_update_config(args: &Args) -> Settings {
+    let mut settings: Settings = match load_file_config() {
         Ok(settings) => settings,
         Err(err) => panic!("Failed to load config: {}", err),
     };
@@ -167,8 +178,32 @@ fn load_and_update_config() -> Settings {
     settings
 }
 
+fn i_selt_in_exeution() -> bool {
+    let processes = list_processes();
+
+    if processes
+        .iter()
+        .filter(|p| p.comm.contains("blckpp"))
+        .count()
+        > 1
+    {
+        return true;
+    }
+
+    false
+}
+
 fn main() {
-    let default_settings = load_and_update_config();
+    let args = Args::parse();
+
+    let default_settings = load_and_update_config(&args);
+
+    if args.settings {
+        return;
+    } else if i_selt_in_exeution() {
+        println!("blckpp is already running");
+        return;
+    }
 
     listen_process(default_settings);
 }

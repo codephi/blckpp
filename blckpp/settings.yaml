@@ -1,4 +1,0 @@
-sleep: 500
-blocked:
-- firefox
-active: true
